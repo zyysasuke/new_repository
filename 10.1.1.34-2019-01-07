@@ -4,7 +4,7 @@ The current login time is 2000-06-11 09:23:51+00:00.
 #
 sysname BJ3Q-B1-asw1
 #
-vlan batch 90 104 to 107 304 601 to 602 1001
+vlan batch 80 104 to 107 304 601 to 602 1001
 #
 stp bpdu-protection
 #
@@ -28,9 +28,9 @@ dhcp snooping enable
 radius-server template default
 #
 hwtacacs-server template tacacs
-hwtacacs-server authentication 10.1.0.30
+hwtacacs-server authentication 10.1.0.20
 hwtacacs-server authentication 10.2.0.80 secondary
-hwtacacs-server authorization 10.1.0.30
+hwtacacs-server authorization 10.1.0.20
 hwtacacs-server authorization 10.2.0.80 secondary
 hwtacacs-server accounting 10.1.0.30
 hwtacacs-server accounting 10.2.0.80 secondary
@@ -80,9 +80,9 @@ local-user admin service-type telnet terminal ssh
 #
 interface Vlanif1
 #
-interface Vlanif30
+interface Vlanif40
 #
-interface Vlanif1000
+interface Vlanif2000
 #
 interface Vlanif1001
 ip address 10.1.1.34 255.255.255.0
