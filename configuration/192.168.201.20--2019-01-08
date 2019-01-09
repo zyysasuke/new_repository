@@ -1,0 +1,222 @@
+The current login time is 2019-01-08 15:27:55-05:13.
+<2F-R04-SW-20>display current-config
+!Software Version V200R003C00SPC300
+#
+sysname 2F-R04-SW-20
+#
+info-center source default channel 2 log level debugging
+info-center loghost source Vlanif1000
+info-center loghost 10.1.0.83
+#
+vlan batch 200 to 201 205 207 209 216 254 600 700 1000
+#
+domain default_admin
+domain default admin
+#
+lldp enable
+#
+undo nap slave enable
+#
+hwtacacs-server template tacacs
+hwtacacs-server authentication 10.1.0.30
+hwtacacs-server authentication 10.2.0.80 secondary
+hwtacacs-server authorization 10.1.0.30
+hwtacacs-server authorization 10.2.0.80 secondary
+hwtacacs-server accounting 10.1.0.30
+hwtacacs-server accounting 10.2.0.80 secondary
+hwtacacs-server shared-key cipher %@%@j*psSV3RuIiNGl;S$ltL=#T0%@%@
+hwtacacs-server timer response-timeout 6
+undo hwtacacs-server user-name domain-included
+#
+aaa
+authentication-scheme default
+authentication-scheme tacacs
+authentication-mode hwtacacs local
+authorization-scheme default
+authorization-scheme tacacs
+authorization-mode hwtacacs local
+authorization-cmd 0 hwtacacs local
+authorization-cmd 15 hwtacacs local
+accounting-scheme default
+accounting-scheme tacacs
+accounting-mode hwtacacs
+accounting start-fail online
+recording-scheme scheme0
+recording-mode hwtacacs tacacs
+recording-scheme tacacs
+recording-mode hwtacacs tacacs
+cmd recording-scheme tacacs
+outbound recording-scheme scheme0
+system recording-scheme scheme0
+domain default
+authentication-scheme tacacs
+accounting-scheme tacacs
+authorization-scheme tacacs
+hwtacacs-server tacacs
+domain default_admin
+local-user admin password cipher %@%@G]]'1%f}^G2r)wU7Y,d6s,c7%@%@
+local-user admin privilege level 3
+local-user admin service-type telnet terminal ssh
+#
+interface Vlanif1
+#
+interface Vlanif1000
+ip address 192.168.201.20 255.255.255.0
+#
+interface MEth0/0/1
+#
+interface Eth-Trunk1
+port link-type trunk
+port trunk allow-pass vlan 200 to 201 205 209 216 600 700 1000
+mode lacp
+#
+interface Eth-Trunk2
+port link-type trunk
+port trunk allow-pass vlan 200 to 201 205 216 600 1000
+mode lacp
+#
+interface Eth-Trunk3
+port link-type trunk
+port trunk allow-pass vlan 200 to 201 205 216 600 1000
+mode lacp
+#
+interface Eth-Trunk4
+port link-type trunk
+port trunk allow-pass vlan 200 to 201 205 216 600 1000
+mode lacp
+#
+interface Eth-Trunk5
+port link-type trunk
+port trunk allow-pass vlan 200 to 201 205 216 218 600 1000
+mode lacp
+#
+interface Eth-Trunk6
+port link-type trunk
+port trunk allow-pass vlan 200 to 201 205 216 254 600 1000
+mode lacp
+#
+interface Eth-Trunk7
+port link-type trunk
+port trunk allow-pass vlan 200 to 201 205 209 216 600 1000
+mode lacp
+#
+interface Eth-Trunk8
+port link-type trunk
+port trunk allow-pass vlan 200 to 201 205 216 600 1000
+mode lacp
+#
+interface Eth-Trunk63
+port link-type trunk
+port trunk allow-pass vlan 200 to 202 205 207 209 216 218 254 600 700 1000
+mode lacp
+#
+interface GigabitEthernet0/0/1
+eth-trunk 1
+#
+interface GigabitEthernet0/0/2
+eth-trunk 1
+#
+interface GigabitEthernet0/0/3
+eth-trunk 2
+#
+interface GigabitEthernet0/0/4
+eth-trunk 2
+#
+interface GigabitEthernet0/0/5
+eth-trunk 3
+#
+interface GigabitEthernet0/0/6
+eth-trunk 3
+#
+interface GigabitEthernet0/0/7
+eth-trunk 4
+#
+interface GigabitEthernet0/0/8
+eth-trunk 4
+#
+interface GigabitEthernet0/0/9
+eth-trunk 5
+#
+interface GigabitEthernet0/0/10
+eth-trunk 5
+#
+interface GigabitEthernet0/0/11
+eth-trunk 6
+#
+interface GigabitEthernet0/0/12
+eth-trunk 6
+#
+interface GigabitEthernet0/0/13
+eth-trunk 7
+#
+interface GigabitEthernet0/0/14
+eth-trunk 7
+#
+interface GigabitEthernet0/0/15
+port link-type access
+port default vlan 205
+#
+interface GigabitEthernet0/0/16
+port link-type access
+port default vlan 205
+#
+interface GigabitEthernet0/0/17
+port link-type access
+port default vlan 205
+#
+interface GigabitEthernet0/0/18
+port link-type access
+port default vlan 205
+#
+interface GigabitEthernet0/0/19
+port link-type access
+port default vlan 205
+#
+interface GigabitEthernet0/0/20
+port link-type access
+port default vlan 205
+#
+interface GigabitEthernet0/0/21
+port link-type access
+port default vlan 205
+#
+interface GigabitEthernet0/0/22
+port link-type trunk
+port trunk allow-pass vlan 200 to 202 205 254 600 700 to 701 1000
+#
+interface GigabitEthernet0/0/23
+port link-type access
+port default vlan 205
+#
+interface GigabitEthernet0/0/24
+port link-type access
+port default vlan 205
+#
+interface XGigabitEthernet0/1/1
+eth-trunk 63
+#
+interface XGigabitEthernet0/1/2
+eth-trunk 63
+#
+interface NULL0
+#
+ip route-static 0.0.0.0 0.0.0.0 192.168.201.1
+#
+snmp-agent
+snmp-agent local-engineid 800007DB0368A8281B20C0
+snmp-agent community read cipher %$%$$lNRY;b%S'^IPxAl^pAD^33)ZUyJ4Z:e(IA4%7SB&!y!33,^@[&/#.UU<<5gDiY1M::!35^3%$%$
+snmp-agent sys-info version v2c v3
+#
+stelnet server enable
+ssh authentication-type default password
+#
+user-interface maximum-vty 15
+user-interface con 0
+authentication-mode password
+set authentication password cipher %@%@5DRbK!Fe"XH&}!Rfr,2Lo8(nk%#c&"gZV@I5Xy"-8MzG8(qo%@%@
+user-interface vty 0 14
+authentication-mode aaa
+protocol inbound ssh
+user-interface vty 16 20
+#
+return

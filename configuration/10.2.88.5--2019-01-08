@@ -1,0 +1,284 @@
+The current login time is 2019-01-08 16:51:36+08:00.
+<wuhancch-4>display current-config
+!Software Version V200R008C00SPC500
+#
+sysname wuhancch-4
+#
+info-center logbuffer size 1024
+#
+vlan batch 200 300 600
+#
+domain default admin
+#
+telnet server enable
+#
+lldp enable
+#
+clock timezone CST add 08:00:00
+#
+hwtacacs-server template tacacs
+hwtacacs-server authentication 10.1.0.30
+hwtacacs-server authentication 10.2.0.80 secondary
+hwtacacs-server authorization 10.1.0.30
+hwtacacs-server authorization 10.2.0.80 secondary
+hwtacacs-server accounting 10.1.0.30
+hwtacacs-server accounting 10.2.0.80 secondary
+hwtacacs-server shared-key cipher %^%#6/_7R~j80Bux@1D==Jx0|9$d25*b7D4m1m*\yi5U%^%#
+hwtacacs-server timer response-timeout 6
+undo hwtacacs-server user-name domain-included
+#
+aaa
+authentication-scheme default
+authentication-scheme tacacs
+authentication-mode hwtacacs local
+authorization-scheme default
+authorization-scheme tacacs
+authorization-mode  hwtacacs local
+authorization-cmd 0 hwtacacs local
+authorization-cmd 15 hwtacacs local
+accounting-scheme default
+accounting-scheme tacacs
+accounting-mode hwtacacs
+accounting start-fail online
+recording-scheme scheme0
+recording-mode hwtacacs tacacs
+recording-scheme tacacs
+recording-mode hwtacacs tacacs
+cmd recording-scheme tacacs
+outbound recording-scheme scheme0
+system recording-scheme scheme0
+domain default
+authentication-scheme tacacs
+accounting-scheme tacacs
+authorization-scheme tacacs
+hwtacacs-server tacacs
+domain default_admin
+local-user admin password irreversible-cipher %^%#A-H_IH%gD$`wm`24Ghl;*k_63xD1P9z}Zf!ka=iQ<\:2:gR6OGhL@RXvA\_=%^%#
+local-user admin privilege level 3
+local-user admin service-type telnet terminal ssh
+#
+ntp-service server disable
+ntp-service ipv6 server disable
+ntp-service unicast-server 182.92.12.11
+#
+interface Vlanif1
+#
+interface Vlanif200
+ip address 10.2.88.5 255.255.252.0
+#
+interface GigabitEthernet0/0/1
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/2
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/3
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/4
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/5
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/6
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/7
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/8
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/9
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/10
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/11
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/12
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/13
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/14
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/15
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/16
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/17
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/18
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/19
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/20
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/21
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/22
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/23
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/24
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/25
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/26
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/27
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/28
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/29
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/30
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/31
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/32
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/33
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/34
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/35
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/36
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/37
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/38
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/39
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/40
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/41
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/42
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/43
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/44
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/45
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/46
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/47
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/48
+port link-type trunk
+port trunk allow-pass vlan 200 300 600
+#
+interface GigabitEthernet0/0/49
+#
+interface GigabitEthernet0/0/50
+#
+interface GigabitEthernet0/0/51
+#
+interface GigabitEthernet0/0/52
+#
+interface NULL0
+#
+ip route-static 0.0.0.0 0.0.0.0 10.2.88.1
+#
+stelnet server enable
+ssh authentication-type default password
+#
+user-interface maximum-vty 15
+user-interface con 0
+authentication-mode password
+set authentication password cipher $1a$!%{'O!!hn6$@HB[&6w-dLvsA))u.ZO7i0:v;!u0B8@$MWEwC6)'$
+user-interface vty 0 14
+authentication-mode aaa
+user-interface vty 16 20
+#
+return

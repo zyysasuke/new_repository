@@ -1,0 +1,28 @@
+The current login time is 2019-01-08 16:55:38+08:00.
+<wz-02>display current-config
+!Software Version V200R008C00SPC500
+#
+sysname wz-02
+#
+info-center logbuffer size 1024
+#
+vlan batch 200 300 600
+#
+domain default admin
+#
+telnet server enable
+#
+lldp enable
+#
+clock timezone CST add 08:00:00
+#
+hwtacacs-server template tacacs
+hwtacacs-server authentication 10.1.0.30
+hwtacacs-server authentication 10.2.0.80 secondary
+hwtacacs-server authorization 10.1.0.30
+hwtacacs-server authorization 10.2.0.80 secondary
+hwtacacs-server accounting 10.1.0.30
+hwtacacs-server accounting 10.2.0.80 secondary
+hwtacacs-server shared-key cipher %^%#&S&,;7r!wHd3^.=6{E0ONvxrPGRo;T[f|I22qaK,%^%#
+hwtacacs-server timer response-timeout 6
+undo hwtacacs-server user-name domain-included

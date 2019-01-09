@@ -1,0 +1,188 @@
+The current login time is 2019-01-08 15:52:57+00:00.
+<2F-R01-SW-22>display current-config
+!Software Version V200R007C00SPC500
+#
+sysname 2F-R01-SW-22
+#
+vlan batch 200 254 600 1000
+#
+domain default admin
+#
+telnet server enable
+#
+lldp enable
+#
+clock timezone UTC add 00:00:00
+#
+hwtacacs-server template tacacs
+hwtacacs-server authentication 10.1.0.30
+hwtacacs-server authentication 10.2.0.80 secondary
+hwtacacs-server authorization 10.1.0.30
+hwtacacs-server authorization 10.2.0.80 secondary
+hwtacacs-server accounting 10.1.0.30
+hwtacacs-server accounting 10.2.0.80 secondary
+hwtacacs-server shared-key cipher %#%#bG.p'\Y-7*oM.BDbV^*Xi/TcVzV"_){){K~I2~v(%#%#
+hwtacacs-server timer response-timeout 6
+undo hwtacacs-server user-name domain-included
+#
+aaa
+authentication-scheme default
+authentication-scheme tacacs
+authentication-mode hwtacacs local
+authorization-scheme default
+authorization-scheme tacacs
+authorization-mode  hwtacacs local
+authorization-cmd 0 hwtacacs local
+authorization-cmd 15 hwtacacs local
+accounting-scheme default
+accounting-scheme tacacs
+accounting-mode hwtacacs
+accounting start-fail online
+recording-scheme scheme0
+recording-mode hwtacacs tacacs
+recording-scheme tacacs
+recording-mode hwtacacs tacacs
+cmd recording-scheme tacacs
+outbound recording-scheme scheme0
+system recording-scheme scheme0
+domain default
+authentication-scheme tacacs
+accounting-scheme tacacs
+authorization-scheme tacacs
+hwtacacs-server tacacs
+domain default_admin
+local-user admin password irreversible-cipher %#%#iD4IA|`sM:QuvOSq^j'43Cz}%lt%5.S:5j9q^Tj*wo+8-:vKo)cf-vJ[=QOX%#%#
+local-user admin privilege level 3
+local-user admin service-type telnet terminal ssh
+#
+interface Vlanif1000
+ip address 192.168.201.22 255.255.255.0
+#
+interface Eth-Trunk1
+port link-type trunk
+port trunk allow-pass vlan 200 254 600 1000
+mode lacp
+#
+interface GigabitEthernet0/0/1
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/2
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/3
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/4
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/5
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/6
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/7
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/8
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/9
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/10
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/11
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/12
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/13
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/14
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/15
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/16
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/17
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/18
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/19
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/20
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/21
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/22
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/23
+eth-trunk 1
+#
+interface GigabitEthernet0/0/24
+eth-trunk 1
+#
+interface GigabitEthernet0/0/25
+#
+interface GigabitEthernet0/0/26
+#
+interface GigabitEthernet0/0/27
+#
+interface GigabitEthernet0/0/28
+#
+interface NULL0
+#
+ip route-static 0.0.0.0 0.0.0.0 192.168.201.1
+#
+snmp-agent
+snmp-agent local-engineid 800007DB037C1CF1F38BE0
+snmp-agent community read cipher %#%#RPs:)2'YZNjMa(*,KElIpLPs'A`I!T'[cZWWZVJOtQ0V&[2D6KW{AC({WR2Sw&@J1*A|+0zuEM:*z`bG%#%#
+snmp-agent sys-info version v2c v3
+#
+stelnet server enable
+ssh authentication-type default password
+#
+user-interface maximum-vty 15
+user-interface con 0
+authentication-mode password
+set authentication password cipher %#%#)6!jV;v\34:9Gx#0:VuGS4k9:Rxx_I$PufKO_jj=4<RGDsnak7%PS*:lap*T%#%#
+user-interface vty 0 14
+authentication-mode aaa
+user-interface vty 16 20
+#
+return

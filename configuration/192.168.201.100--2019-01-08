@@ -1,0 +1,373 @@
+The current login time is 2002-10-24 10:18:30+08:00.
+<HW-8F-01>display current-config
+!Software Version V200R003C00SPC300
+#
+sysname HW-8F-01
+#
+info-center logbuffer size 1024
+#
+router id 1.1.1.1
+#
+vlan batch 200 to 202 207 209 216 218 230 254 301 600 700
+vlan batch 1000
+#
+stp disable
+#
+multicast routing-enable
+#
+domain default admin
+#
+lldp enable
+#
+undo http server enable
+undo http secure-server enable
+#
+undo nap slave enable
+#
+clock timezone CST add 08:00:00
+#
+observe-port 1 interface GigabitEthernet0/0/33
+#
+dhcp enable
+#
+hwtacacs-server template tacacs
+hwtacacs-server authentication 10.1.0.30
+hwtacacs-server authentication 10.2.0.80 secondary
+hwtacacs-server authorization 10.1.0.30
+hwtacacs-server authorization 10.2.0.80 secondary
+hwtacacs-server accounting 10.1.0.30
+hwtacacs-server accounting 10.2.0.80 secondary
+hwtacacs-server shared-key cipher %@%@38WyQSY%%BE:k'#V"5:46B0j%@%@
+hwtacacs-server timer response-timeout 6
+undo hwtacacs-server user-name domain-included
+#
+acl number 2000
+rule 0 permit
+#
+traffic classifier caiwu_acl operator and
+if-match acl 3002
+traffic classifier caiwu_out operator and
+if-match acl 3003
+traffic classifier dnspermit operator and
+if-match acl 3001
+traffic classifier test operator and
+if-match acl 3500
+traffic classifier toutiao_acl operator and
+if-match acl 3000
+#
+traffic behavior caiwu_acl
+deny
+traffic behavior caiwu_out
+permit
+traffic behavior dnspermit
+permit
+traffic behavior test
+redirect ip-nexthop 192.168.200.5 forced
+traffic behavior toutiao_acl
+deny
+#
+traffic policy caiwu_acl
+classifier caiwu_out behavior caiwu_out
+classifier caiwu_acl behavior caiwu_acl
+traffic policy ndspermit
+classifier dnspermit behavior dnspermit
+traffic policy test
+classifier test behavior test
+traffic policy toutiao_acl
+classifier dnspermit behavior dnspermit
+classifier toutiao_acl behavior toutiao_acl
+#
+aaa
+authentication-scheme default
+authentication-scheme tacacs
+authentication-mode hwtacacs local
+authorization-scheme default
+authorization-scheme tacacs
+authorization-mode hwtacacs local
+authorization-cmd 0 hwtacacs local
+authorization-cmd 15 hwtacacs local
+accounting-scheme default
+accounting-scheme tacacs
+accounting-mode hwtacacs
+accounting start-fail online
+recording-scheme scheme0
+recording-mode hwtacacs tacacs
+recording-scheme tacacs
+recording-mode hwtacacs tacacs
+cmd recording-scheme tacacs
+outbound recording-scheme scheme0
+system recording-scheme scheme0
+domain default
+authentication-scheme tacacs
+accounting-scheme tacacs
+authorization-scheme tacacs
+hwtacacs-server tacacs
+domain default_admin
+local-user admin password cipher %@%@SKXqYuMG}~DDcMWnX{7P_J@y%@%@
+local-user admin privilege level 3
+local-user admin ftp-directory flash:
+local-user admin service-type telnet terminal ssh
+local-user bytedance password cipher %@%@6^U>IP2:f<#3iG,F=4/GSE8g%@%@
+local-user bytedance privilege level 3
+local-user bytedance service-type ssh
+#
+isis 1
+#
+ntp-service unicast-server 182.92.12.11
+#
+interface Vlanif1
+#
+interface Vlanif1000
+ip address 192.168.201.100 255.255.255.0
+#
+interface MEth0/0/1
+#
+interface Eth-Trunk1
+description up to 10F
+port link-type trunk
+port trunk allow-pass vlan 200 to 202 207 216 230 254 301 600 700 1000
+mode lacp
+#
+interface Eth-Trunk2
+description up to 11F
+mode lacp
+#
+interface GigabitEthernet0/0/1
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/2
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/3
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/4
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/5
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/6
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/7
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/8
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/9
+port link-type access
+port default vlan 600
+#
+interface GigabitEthernet0/0/10
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/11
+port link-type access
+#
+interface GigabitEthernet0/0/12
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/13
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/14
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/15
+port link-type access
+port default vlan 700
+#
+interface GigabitEthernet0/0/16
+description up to LiangZi
+port link-type access
+port default vlan 700
+#
+interface GigabitEthernet0/0/17
+description up to TeMai
+port link-type access
+port default vlan 700
+#
+interface GigabitEthernet0/0/18
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/19
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/20
+port link-type access
+port default vlan 254
+stp edged-port enable
+#
+interface GigabitEthernet0/0/21
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/22
+port link-type access
+#
+interface GigabitEthernet0/0/23
+port link-type access
+port default vlan 301
+#
+interface GigabitEthernet0/0/24
+description B8-to-A5
+port link-type access
+port default vlan 301
+#
+interface GigabitEthernet0/0/25
+port link-type access
+port default vlan 700
+#
+interface GigabitEthernet0/0/26
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/27
+port link-type trunk
+port trunk allow-pass vlan 200 to 202 600 700 1000
+#
+interface GigabitEthernet0/0/28
+port link-type trunk
+port trunk allow-pass vlan 200 to 202 600 700 1000
+#
+interface GigabitEthernet0/0/29
+port link-type trunk
+port trunk allow-pass vlan 200 to 202 600 700 1000
+#
+interface GigabitEthernet0/0/30
+port link-type trunk
+port trunk allow-pass vlan 200 to 202 600 700 1000
+#
+interface GigabitEthernet0/0/31
+port link-type trunk
+port trunk allow-pass vlan 200 to 202 600 700 1000
+#
+interface GigabitEthernet0/0/32
+port link-type trunk
+port trunk allow-pass vlan 200 to 202 600 700 1000
+#
+interface GigabitEthernet0/0/33
+port link-type trunk
+port trunk allow-pass vlan 200 to 202 600 700 1000
+#
+interface GigabitEthernet0/0/34
+port link-type trunk
+port trunk allow-pass vlan 200 to 202 600 700 1000
+#
+interface GigabitEthernet0/0/35
+port link-type trunk
+port trunk allow-pass vlan 200 to 202 207 209 230 254 301 600 700 1000
+#
+interface GigabitEthernet0/0/36
+port link-type trunk
+port trunk allow-pass vlan 200 to 202 600 700 1000
+#
+interface GigabitEthernet0/0/37
+port link-type access
+#
+interface GigabitEthernet0/0/38
+port link-type access
+port default vlan 200
+#
+interface GigabitEthernet0/0/39
+port link-type access
+#
+interface GigabitEthernet0/0/40
+port link-type access
+#
+interface GigabitEthernet0/0/41
+port link-type access
+#
+interface GigabitEthernet0/0/42
+port link-type access
+#
+interface GigabitEthernet0/0/43
+#
+interface GigabitEthernet0/0/44
+port link-type access
+#
+interface GigabitEthernet0/0/45
+description NEI WANG PORT!
+port link-type trunk
+port trunk allow-pass vlan 200
+port-mirroring to observe-port 1 inbound
+port-mirroring to observe-port 1 outbound
+#
+interface GigabitEthernet0/0/46
+description WAI WANG PORT!
+port link-type trunk
+port trunk allow-pass vlan 100 to 102 1000
+#
+interface GigabitEthernet0/0/47
+description to jian kong switch
+port link-type trunk
+port trunk allow-pass vlan 200 to 202 207 209 216 218 230 254 301 600 700
+port trunk allow-pass vlan 1000
+#
+interface GigabitEthernet0/0/48
+description to ZhongHang-F2
+port link-type trunk
+undo port trunk allow-pass vlan 1
+port trunk allow-pass vlan 200 to 202 207 209 216 230 254 301 600 700 1000
+#
+interface XGigabitEthernet0/1/1
+eth-trunk 1
+#
+interface XGigabitEthernet0/1/2
+eth-trunk 1
+#
+interface XGigabitEthernet0/1/3
+#
+interface XGigabitEthernet0/1/4
+#
+interface NULL0
+#
+route-policy test permit node 10
+if-match acl 2001
+#
+igmp
+#
+pim
+#
+ip route-static 0.0.0.0 0.0.0.0 192.168.201.1
+#
+snmp-agent
+snmp-agent local-engineid 800007DB03486276FE6D30
+snmp-agent community read cipher %$%$}CHbO@#sL+DKVkN7<>oCy*6"(Hk{B6nVU=,5b;YsY'hQ*6%y-QI7.i_hE#i/-xHVUoN.6.y*%$%$
+snmp-agent community read cipher %$%$@OhnT_{=bPc'#lQ>-$^~y-0,8;aZJ8`OBVa;;C$qAk`W-0/ycsKj%=@ZC3d3XQ(-tKZL08y-%$%$
+snmp-agent sys-info version all
+#
+stelnet server enable
+ssh authentication-type default password
+ssh client first-time enable
+#
+user-interface maximum-vty 15
+user-interface con 0
+authentication-mode password
+set authentication password cipher %@%@)+XdL-xqX"b,k."'.VF),YAk8c0~7_VpF@9`q*N'=id6YAn,%@%@
+user-interface vty 0 4
+authentication-mode aaa
+idle-timeout 0 0
+protocol inbound ssh
+user-interface vty 5 14
+authentication-mode aaa
+protocol inbound ssh
+user-interface vty 16 20
+#
+return
